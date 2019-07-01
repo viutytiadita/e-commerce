@@ -8,7 +8,7 @@ const imageUpload = require('../middlewares/imageUpload')
 
 productRouter.get('/',ProductController.fetch)
 productRouter.use(authentication)
-// productRouter.use('/:cartid',authorization)
+productRouter.use('/:cartid',authorization)
 productRouter.post('/',imageUpload.multer.single('image'),imageUpload.sendUploadToGCS,ProductController.create)
 productRouter.delete('/:productid',ProductController.delete)
 productRouter.put('/:productid',imageUpload.multer.single('image'),imageUpload.sendUploadToGCS,ProductController.edit)

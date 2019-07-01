@@ -7,7 +7,7 @@ Feature
 | method | routes                        | detail                                                       |
 | ------ | ----------------------------- | ------------------------------------------------------------ |
 | POST    | /users/login                    |        user login to system                                    |
- POST    | /users/login                    |        user login to system                                    |
+
 > input: "email" & "password",
 > expected output : code 200, accesstoken 
 
@@ -15,7 +15,7 @@ Feature
 | method | routes                        | detail                                                       |
 | ------ | ----------------------------- | ------------------------------------------------------------ |
 | POST    | /users/register                    |        create new user                                   |
-> input: "email" & "password" & "username",
+> input: "email" & "password" & "username", "role : admin or customer",
 > expected output : code 201, object user 
 
 
@@ -27,10 +27,13 @@ Feature
 > expected output : code 200, array of object product 
 
 | POST    | /products                    |        create new product                                  |
-> input: name,category,price
+> input: name,stock,price,picture
 > expected output : code 201, object product
  
 | DELETE    | /products/:productid                    |        delete one product                                 |
+> expected output : code 200
+
+| PUT    | /products/:productid                    |        edit one product                                 |
 > expected output : code 200
 
 #####need auth
@@ -46,12 +49,6 @@ Feature
 | method | routes                        | detail                                                       |
 | ------ | ----------------------------- | ------------------------------------------------------------ |
 | GET    | /products                    |        show all product list                                   |
-> expected output : code 200, array of object product 
-
-### 6. Search
-| method | routes                        | detail                                                       |
-| ------ | ----------------------------- | ------------------------------------------------------------ |
-| GET    | /products/search?p={}                    |        show all product list by search                                   |
 > expected output : code 200, array of object product 
 
 

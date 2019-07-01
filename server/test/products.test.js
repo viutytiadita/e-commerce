@@ -48,14 +48,14 @@ describe.only('CRUD products', function () {
         it('should be an object with 201 status code', function (done) {
             chai.request(app).post('/products')
                 .set('token', tokenUSer)
-                .send({ name: 'basic shirt', category: 'pakaian', price: 80000, picture: 'storage.googleapis.com/dhed73d3uheuh'})
+                .send({ name: 'basic shirt', stock: 5, price: 80000, picture: 'storage.googleapis.com/dhed73d3uheuh'})
                 .then(function (res) {
                     console.log(res.body)
                     expect(res).to.have.status(201)
                     expect(res.body).to.be.an('object')
                     expect(res.body).to.have.property('name')
                     expect(res.body).to.have.property('_id')
-                    expect(res.body).to.have.property('category')
+                    expect(res.body).to.have.property('stock')
                     expect(res.body).to.have.property('price')
                     expect(res.body).to.have.property('picture')
                     expect(res.body.price).to.be.a('number')
@@ -83,7 +83,7 @@ describe.only('CRUD products', function () {
         })
         it('should be an object with 401 status code', function (done) {
             chai.request(app).post('/products')
-                .send({ name: 'lovely dress', category: 'pakaian', price: 20000 , picture: 'storage.googleapis.com/dhed73d3uheuh'})
+                .send({ name: 'lovely dress', stock: 5, price: 20000 , picture: 'storage.googleapis.com/dhed73d3uheuh'})
                 .then(function (res) {
                     expect(res).to.have.status(401)
                     expect(res.body).to.be.an('object')
@@ -97,7 +97,7 @@ describe.only('CRUD products', function () {
         it('should be an object with 400 status code', function (done) {
             chai.request(app).post('/products')
                 .set('token', tokenUSer)
-                .send({ name: 'basic shirt', category: 'pakaian', price: -500 , picture: 'storage.googleapis.com/dhed73d3uheuh'})
+                .send({ name: 'basic shirt', stock: 5, price: -500 , picture: 'storage.googleapis.com/dhed73d3uheuh'})
                 .then(function (res) {
                     expect(res).to.have.status(400)
                     expect(res.body).to.be.an('object')
@@ -138,14 +138,14 @@ describe.only('CRUD products', function () {
     describe('Edit / products', function () {
         it('should be an object with 200 status code', function (done) {
             chai.request(app).put(`/products/${idProduct}`)
-                .send({ name: 'cute shirt', category: 'pakaian', price: 20000 , picture: 'storage.googleapis.com/dhed73d3uheuh'})
+                .send({ name: 'cute shirt', stock: 5, price: 20000 , picture: 'storage.googleapis.com/dhed73d3uheuh'})
                 .set('token', tokenUSer)
                 .then(function (res) {
                     expect(res).to.have.status(200)
                     expect(res.body).to.be.an('object')
                     expect(res.body).to.have.property('name')
                     expect(res.body).to.have.property('_id')
-                    expect(res.body).to.have.property('category')
+                    expect(res.body).to.have.property('stock')
                     expect(res.body).to.have.property('price')
                     done()
                 })
@@ -156,7 +156,7 @@ describe.only('CRUD products', function () {
         it('should be an object with 400 status code', function (done) {
             chai.request(app).put(`/products/${idProduct}`)
                 .set('token', tokenUSer)
-                .send({ name: '', category: '', price: '', picture: 'storage.googleapis.com/dhed73d3uheuh'})
+                .send({ name: '', stock: '', price: '', picture: 'storage.googleapis.com/dhed73d3uheuh'})
                 .then(function (res) {
                     expect(res).to.have.status(400)
                     expect(res.body).to.be.an('object')
@@ -169,7 +169,7 @@ describe.only('CRUD products', function () {
         })
         it('should be an object with 401 status code', function (done) {
             chai.request(app).put(`/products/${idProduct}`)
-                .send({ name: 'lovely dress', category: 'pakaian', price: 20000 ,picture: 'storage.googleapis.com/dhed73d3uheuh'})
+                .send({ name: 'lovely dress', stock: 5, price: 20000 ,picture: 'storage.googleapis.com/dhed73d3uheuh'})
                 .then(function (res) {
                     expect(res).to.have.status(401)
                     expect(res.body).to.be.an('object')
@@ -183,7 +183,7 @@ describe.only('CRUD products', function () {
         it('should be an object with 400 status code', function (done) {
             chai.request(app).put(`/products/${idProduct}`)
                 .set('token', tokenUSer)
-                .send({ name: 'basic shirt', category: 'pakaian', price: -500, picture: 'storage.googleapis.com/dhed73d3uheuh'})
+                .send({ name: 'basic shirt', stock: 5, price: -500, picture: 'storage.googleapis.com/dhed73d3uheuh'})
                 .then(function (res) {
                     expect(res).to.have.status(400)
                     expect(res.body).to.be.an('object')
