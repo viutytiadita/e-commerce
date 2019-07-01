@@ -50,7 +50,7 @@ describe('Test Cart', function () {
         .request(app)
         .post("/products")
         .set('token', tokenUSer)
-        .send({ name: 'basic shirt', category: 'pakaian', price: 80000, user_id: idUser})
+        .send({ name: 'basic shirt', stock: 5, price: 80000, picture: 'cloudapis.com/djdwij'})
         .then(function (res) {
             idProduct= res.body._id
             done()
@@ -63,13 +63,14 @@ describe('Test Cart', function () {
         it('should be an object with 201 status code', function (done) {
             chai.request(app).post('/products/carts')
                 .set('token', tokenUSer)
-                .send({ user_id: idUser, product_id: idProduct })
+                .send({ user_id: idUser, product_id: idProduct, count : 1 })
                 .then(function (res) {
                     expect(res).to.have.status(201)
                     expect(res.body).to.be.an('object')
                     expect(res.body).to.have.property('user_id')
                     expect(res.body).to.have.property('_id')
                     expect(res.body).to.have.property('product_id')
+                    expect(res.body).to.have.property('count')
                     idCart = res.body._id
                     done()
                 })
@@ -79,7 +80,7 @@ describe('Test Cart', function () {
         })
         it('should be an object with 201 status code', function (done) {
             chai.request(app).post('/products/carts')
-                .send({ user_id: idUser, product_id: idProduct })
+                .send({ user_id: idUser, product_id: idProduct, count : 1 })
                 .then(function (res) {
                     expect(res).to.have.status(401)
                     expect(res.body).to.be.an('object')

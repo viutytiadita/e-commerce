@@ -76,6 +76,7 @@ describe('Test users', function(){
                 expect(res).to.have.status(200)
                 expect(res.body).to.be.an('object')
                 expect(res.body).to.have.property('token')
+                expect(res.body).to.have.property('role')
                 done()
             })
             .catch(function(err){
