@@ -1,6 +1,6 @@
 # e-commerce
 
-Feature
+Feature and Endpoint
 
 ### 1. Login
 
@@ -9,7 +9,7 @@ Feature
 | POST    | /users/login                    |        user login to system                                    |
 
 > input: "email" & "password",
-> expected output : code 200, accesstoken 
+> expected output : code 200, accesstoken, role
 
 ### 2. Register
 | method | routes                        | detail                                                       |
